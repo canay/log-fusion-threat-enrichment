@@ -1,0 +1,32 @@
+field,label,value,count,share
+Session End Reason,1,aged-out,11889,0.6156594686965978
+Session End Reason,1,tcp-fin,3415,0.17684221428201544
+Session End Reason,1,tcp-rst-from-client,1796,0.09300398736471441
+Session End Reason,1,threat,1317,0.06819947180363524
+Session End Reason,1,tcp-rst-from-server,584,0.03024183108073119
+Session End Reason,1,policy-deny,202,0.010460359380663871
+Session End Reason,1,auth-policy-redirect,82,0.004246284501061571
+Session End Reason,1,nan,25,0.001294598933250479
+Session End Reason,1,auth-policy-deny,1,5.178395733001916e-05
+Session End Reason,0,aged-out,526016,0.5110598339591844
+Session End Reason,0,policy-deny,239041,0.2322443685542596
+Session End Reason,0,tcp-fin,149514,0.1452628817651431
+Session End Reason,0,tcp-rst-from-client,75769,0.07361466677677761
+Session End Reason,0,tcp-rst-from-server,25941,0.02520342185928794
+Session End Reason,0,threat,8341,0.008103841090486901
+Session End Reason,0,auth-policy-redirect,3539,0.0034383759284537995
+Session End Reason,0,nan,1099,0.0010677522309609285
+Session End Reason,0,auth-policy-deny,4,3.88626835654569e-06
+Session End Reason,0,tcp-reuse,1,9.715670891364226e-07
+Threat/Content Type,1,end,19001,0.9839469732276941
+Threat/Content Type,1,deny,310,0.01605302677230594
+Threat/Content Type,0,end,785582,0.7632456170179691
+Threat/Content Type,0,drop,230181,0.2236362841445109
+Threat/Content Type,0,deny,13499,0.013115184136252568
+Threat/Content Type,0,start,3,2.914701267409268e-06
+AI Traffic,1,no,19311,1.0
+AI Traffic,0,no,1029265,1.0
+rule_SER_eq_threat,,precision,1317,0.13636363636363635
+rule_SER_eq_threat,,recall,1317,0.06819947180363524
+session_id,,max_observed,944998,
+temporal_test_segment,,seconds,531,

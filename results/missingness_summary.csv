@@ -1,0 +1,33 @@
+,missing,share
+has_linked_threat,0,0.0
+Session ID,0,0.0
+Receive Time,0,0.0
+Generate Time,0,0.0
+High Res Timestamp,0,0.0
+Action,0,0.0
+Threat/Content Type,0,0.0
+Session End Reason,1124,0.001071929931640625
+Application,0,0.0
+Source Zone,0,0.0
+Destination Zone,0,0.0
+Inbound Interface,0,0.0
+Outbound Interface,230181,0.21951770782470703
+IP Protocol,0,0.0
+Source Port,0,0.0
+Destination Port,0,0.0
+Source Country,0,0.0
+Destination Country,0,0.0
+Category,0,0.0
+Bytes,0,0.0
+Bytes Sent,0,0.0
+Bytes Received,0,0.0
+Packets,0,0.0
+Packets Sent,0,0.0
+Packets Received,0,0.0
+Elapsed Time (sec),0,0.0
+Subcategory of app,0,0.0
+Category of app,0,0.0
+Technology of app,0,0.0
+Risk of app,0,0.0
+SaaS of app,0,0.0
+AI Traffic,0,0.0

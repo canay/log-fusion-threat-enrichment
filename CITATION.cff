@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: "Session-Level Fusion of Enterprise Firewall Traffic and Threat Logs for Triage-Driven Rare Security-Event Prediction"
+message: "If you use this reproducibility package, please cite the associated paper and this repository."
+type: software
+authors:
+  - family-names: "Canay"
+    given-names: "Özkan"
+  - family-names: "Özkurt"
+    given-names: "Cem"
+repository-code: "https://github.com/canay/log-fusion-threat-enrichment"
+version: "0.2.0"
+date-released: "2026-06-05"
+license: "MIT"
