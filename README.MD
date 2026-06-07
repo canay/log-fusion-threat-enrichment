@@ -58,7 +58,7 @@ License: MIT (see `LICENSE`). Target journal: Computer Networks. Update the cita
 
 - `code/`: label-construction reference implementation (`01_build_linked_threat_dataset.py`, with expected-count assertions), Python benchmark, operating-point, evidence-family, missingness and proxy-field diagnostics, and the figure-generation scripts
 - `data/processed/`: placeholder only; row-level processed firewall datasets are not included by default
-- `results/`: CSV/JSON benchmark outputs, linkage audit, metadata, timing files from the Oracle Cloud VPS runs, operating-point diagnostics, evidence-family/calibration diagnostics, bootstrap confidence intervals, linkage-sensitivity output, runtime profile, error-pocket summaries, and the per-column missingness summary
+- `results/`: CSV/JSON benchmark outputs, linkage audit, metadata, timing files from the Oracle Cloud VPS runs, operating-point diagnostics, evidence-family/calibration diagnostics, bootstrap confidence intervals, linkage-sensitivity output, runtime profile, error-pocket summaries, the per-column missingness summary, the proxy-field value audit, and the follow-up weighted/seed/strict-label diagnostics (followup_metrics.csv)
 - `requirements.txt`: Python dependencies used in the experiments
 - `CITATION.cff`: citation metadata for this artifact
 
