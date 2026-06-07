@@ -2,7 +2,7 @@
 
 Public reproducibility artifact for the manuscript:
 
-**Session-Level Fusion of Enterprise Firewall Traffic and Threat Logs for Triage-Driven Rare Security-Event Prediction**
+**The Echo in the Traffic: Session-Level Log Fusion for Threat-Evidence Enrichment in Enterprise Firewalls**
 
 Repository short name:
 
