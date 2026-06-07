@@ -14,7 +14,7 @@ Public GitHub URL:
 
 ## Related study
 
-This repository supports a paper on session-level linkage of real enterprise Palo Alto traffic and threat logs. The study asks whether structured traffic-log attributes can predict whether a traffic session is linked to threat-log evidence. The active manuscript framing is operational network telemetry linkage, traffic/security log correlation, and rare security-event prediction for secure network monitoring.
+This repository supports a paper on session-level linkage of real enterprise Palo Alto traffic and threat logs (source platform: PA-1410 pair in active-passive HA, PAN-OS 11.1.10-h1 at collection time, offline CSV export). The study asks whether structured traffic-log attributes can predict whether a traffic session is linked to threat-log evidence. The active manuscript framing is operational network telemetry linkage, traffic/security log correlation, and rare security-event prediction for secure network monitoring.
 
 Target:
 
