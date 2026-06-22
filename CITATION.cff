@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "The Echo in the Traffic: Session-Level Log Fusion for Threat-Evidence Enrichment in Enterprise Firewalls"
+title: "Session-level linkage of enterprise firewall traffic and threat logs for rare security-event prediction"
 message: "If you use this reproducibility package, please cite the associated paper and this repository."
 type: software
 authors:

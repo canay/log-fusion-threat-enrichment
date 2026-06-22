@@ -2,7 +2,7 @@
 
 Public reproducibility artifact for the manuscript:
 
-**The Echo in the Traffic: Session-Level Log Fusion for Threat-Evidence Enrichment in Enterprise Firewalls**
+**Session-level linkage of enterprise firewall traffic and threat logs for rare security-event prediction**
 
 Repository short name:
 
