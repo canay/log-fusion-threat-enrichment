@@ -203,6 +203,10 @@ python -m pip install -r requirements.txt
 
 The commands below require authorized access to the row-level processed artifacts. They will not run from the public-facing repository unless the required datasets are placed under `data/processed/` after institutional permission.
 
+### Why no row-level sample is included (not even a small one)
+
+The data-governance statement of the associated manuscript limits public artifacts to code and aggregate outputs unless an explicit institutional authorization and a privacy/security review approve row-level release. Even a small anonymised sample (for example, 1,000 sessions) is withheld until that review, for two reasons. First, session rows expose the operational context of a real institutional firewall (zone, interface, application, and country distributions), and the manuscript notes that processed row-level derivatives can carry residual risk when linked with external information. Second, at the natural 1.84% prevalence a 1,000-row sample would contain only about 18 positive sessions, which is too few to reproduce any reported result, so the compliance risk would buy no scientific value. The fixed aggregate result files in `results/` are sufficient to verify every number reported in the manuscript. If institutional authorization is granted, a documented anonymised sample will be added in a tagged release.
+
 Run the full baseline:
 
 ```bash
