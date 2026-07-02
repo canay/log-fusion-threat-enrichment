@@ -20,7 +20,8 @@ from fig_style import set_style, save, hgrid, vgrid, INK, C1, C2, C3, NEUTRAL, A
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "github-log-fusion-threat-enrichment" / "results"
-OUTDIR = ROOT / "COMNET" / "manuscript_r0"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUTDIR = PROJECT_ROOT / "COMNET" / "manuscript-r0"
 
 
 def wrap(text: str, width: int) -> str:

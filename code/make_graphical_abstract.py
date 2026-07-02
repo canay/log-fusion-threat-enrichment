@@ -3,7 +3,7 @@
 Reuses the manuscript palette. Open Sans is requested; if unavailable the
 renderer falls back to the matplotlib default (regenerate on Windows for the
 submission copy if the fallback font is visible).
-Output: COMNET/manuscript_r0/graphical_abstract.png
+Output: COMNET/manuscript-r0/graphical_abstract.png
 """
 from pathlib import Path
 import matplotlib
@@ -58,6 +58,6 @@ for (lab, v, c), x in zip(bars, bx):
     ax.text(x, 1.86, lab, ha="center", va="top", fontsize=4.8, color=INK)
 ax.text(10.95, 0.55, "Weak global signal, strong analyst-budget\ntriage queue for SOC monitoring", ha="center", fontsize=5.0, color=MUTED)
 
-out = Path(__file__).resolve().parents[1] / "COMNET/manuscript_r0/graphical_abstract.png"
+out = Path(__file__).resolve().parents[2] / "COMNET/manuscript-r0/graphical_abstract.png"
 fig.savefig(out, bbox_inches="tight", pad_inches=0.04, facecolor="white")
 print("yazildi:", out)

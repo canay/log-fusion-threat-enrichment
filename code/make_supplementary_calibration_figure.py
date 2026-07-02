@@ -8,7 +8,8 @@ from fig_style import set_style, save, hgrid, INK, C1, C2, ACCENT, NEUTRAL
 
 ROOT = Path(__file__).resolve().parents[1]
 INPUT = ROOT / "data" / "reports_evidence_uncertainty" / "calibration_bins.csv"
-OUTDIR = ROOT / "COMNET" / "manuscript_r0"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUTDIR = PROJECT_ROOT / "COMNET" / "manuscript-r0"
 
 
 def main() -> None:

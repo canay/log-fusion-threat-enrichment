@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "Session-level linkage of enterprise firewall traffic and threat logs for rare security-event prediction"
+title: "The Echo in the Traffic: Session-Level Log Fusion for Threat-Evidence Enrichment in Enterprise Firewalls"
 message: "If you use this reproducibility package, please cite the associated paper and this repository."
 type: software
 authors:
@@ -7,7 +7,9 @@ authors:
     given-names: "Özkan"
   - family-names: "Özkurt"
     given-names: "Cem"
+  - family-names: "Garri"
+    given-names: "Fatmir"
 repository-code: "https://github.com/canay/log-fusion-threat-enrichment"
-version: "0.2.0"
-date-released: "2026-06-05"
+version: "0.3.0"
+date-released: "2026-07-02"
 license: "MIT"

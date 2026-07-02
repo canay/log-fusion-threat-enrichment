@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 from fig_style import set_style, save, INK, C1, C2, ACCENT, NEUTRAL
 
-OUTDIR = Path(__file__).resolve().parents[1] / "COMNET" / "manuscript_r0"
+OUTDIR = Path(__file__).resolve().parents[2] / "COMNET" / "manuscript-r0"
 
 
 def main() -> None:

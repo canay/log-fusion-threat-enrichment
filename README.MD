@@ -2,7 +2,7 @@
 
 Public reproducibility artifact for the manuscript:
 
-**Session-level linkage of enterprise firewall traffic and threat logs for rare security-event prediction**
+**The Echo in the Traffic: Session-Level Log Fusion for Threat-Evidence Enrichment in Enterprise Firewalls**
 
 Repository short name:
 
@@ -31,6 +31,7 @@ Author order:
 
 1. **Özkan Canay**, corresponding author
 2. **Cem Özkurt**
+3. **Fatmir Garri**
 
 Özkan Canay
 
@@ -47,6 +48,13 @@ Cem Özkurt
 - Sakarya University
 - Email: cemozkurt@sakarya.edu.tr
 - ORCID: 0000-0002-1251-7715
+
+Fatmir Garri
+
+- Department of Information Technology
+- Sakarya University of Applied Sciences
+- Email: fatmirgarri@subu.edu.tr
+- ORCID: 0009-0005-6762-6846
 
 GitHub:
 
@@ -130,7 +138,7 @@ Positive-class performance in the no-traffic-outcome setting:
 Operating-point diagnostics:
 
 - Full stratified XGBoost, top 100 ranked sessions: 99 positives, 99.0% precision, 53.8x lift over prevalence
-- No-traffic-outcome XGBoost, top 100 ranked sessions: 89 positives, 89.0% precision, 48.3x lift over prevalence
+- No-traffic-outcome XGBoost, top 100 ranked sessions: 88 positives, 88.0% precision, 47.8x lift over prevalence
 - Chronological holdout XGBoost, top 100 ranked sessions: 100 positives, 100.0% precision, 54.8x lift over prevalence
 - No-traffic-outcome feature importance is led by `Packets`, `Outbound Interface`, `Risk of app`, `Destination Zone`, `Source Zone`, and `Bytes Received`
 
@@ -148,7 +156,7 @@ Validation-strengthening diagnostics:
 - Full stratified XGBoost average precision is 0.0941 with a 95% bootstrap interval of 0.0860 to 0.1031.
 - Full stratified XGBoost top-100 precision is 0.9900 with a 95% bootstrap interval of 0.9700 to 1.0000.
 - Strict nonzero session plus exact tuple overlap retains 1,233 positives, or 6.38% of the primary session-overlap positives.
-- In the CUDA-enabled diagnostic pass, the full stratified XGBoost fit-and-predict stage processed the 1,048,576-row corpus with a 209,716-row holdout in 28.2 seconds.
+- In the CUDA-enabled validation-strengthening pass, executed on a consumer workstation with an NVIDIA GeForce GTX 1050 GPU, the full stratified XGBoost fit-and-predict stage processed the 1,048,576-row corpus with a 209,716-row holdout in 28.2 seconds.
 - Error-pocket profiling shows that high-confidence positives concentrate in a narrow DNS/DMZ/WAN/threat-termination pocket, while false negatives are more diffuse across ordinary-looking traffic contexts.
 
 Interpretation:
@@ -157,7 +165,9 @@ High accuracy is misleading because the positive class is only 1.84%. Macro-F1, 
 
 ## Experimental environment
 
-Final timing-sensitive experiments were conducted on:
+The experiments were executed in two environments:
+
+Benchmark environment (full-corpus benchmark, sample diagnostic benchmark, ablations, and sample cross-validation results in `results/`):
 
 - Oracle Cloud Ampere virtual private server
 - 4 OCPU
@@ -165,9 +175,23 @@ Final timing-sensitive experiments were conducted on:
 - Python 3.12.3
 - Linux aarch64
 
-The same VPS environment was used for the final full-corpus benchmark, sample diagnostic benchmark, ablation, and cross-validation results in `results/`.
+Validation-strengthening diagnostic pass (bootstrap intervals, operating-point curves, temporal re-run, and the runtime profile in `results/validation_runtime_profile.csv`):
 
-The additional operating-point and evidence-family diagnostics were produced from restricted processed artifacts and are not used as timing evidence.
+- Consumer workstation
+- NVIDIA GeForce GTX 1050 GPU (CUDA-enabled XGBoost, `device_requested=cuda`, `device_used=cuda`)
+
+The additional operating-point and evidence-family diagnostics were produced from restricted processed artifacts and are not used as timing evidence. All reported timings are environment-specific scale checks rather than portable speed benchmarks.
+
+## Result file provenance
+
+The result files in `results/` come from separate fixed passes; small default-threshold count differences between passes are expected because each pass retrains the model:
+
+- `baseline_benchmark_*` (multi-model benchmark, ablations, sample CV): source of the manuscript full-corpus benchmark and ablation tables.
+- `validation_strengthening_summary.md`, `bootstrap_confidence_intervals.csv`, `validation_runtime_profile.csv`, `error_profile_*`, `linkage_sensitivity.csv`: canonical source of the manuscript operating-point table, bootstrap confidence intervals, temporal holdout narrative, and runtime profile.
+- `q1_operating_points.csv`, `q1_analysis_summary.md`, `q1_threshold_summary.csv`, `q1_analysis_payload.json`: an earlier diagnostic pass retained for transparency; superseded by the validation-strengthening pass for the operating-point and temporal values reported in the manuscript. `q1_feature_importance_no_outcome_xgboost.csv` from this pass still backs the no-outcome feature-importance figure.
+- `evidence_uncertainty_*`, `runtime_profile.csv`, `calibration_bins.csv`, `evidence_family_*`: evidence-family and calibration diagnostics.
+- `followup_metrics.csv`, `pu_estimates.csv`, `missingness_summary.csv`, `proxy_field_audit.csv`: follow-up diagnostics (weighted variant, chronological and rolling-origin checks, anomaly baselines).
+- `fullscale_results.json`, `fullscale_multiseed.csv`, `fullscale_cv.csv`, `q1audit_addons.json`: full-corpus multi-seed, cross-validation, logistic-regression baseline, and statistical-test evidence.
 
 ## Reproducing with authorized processed artifacts
 
@@ -225,4 +249,4 @@ Before linking this repository in a manuscript submission:
 
 ## License
 
-No license has been assigned yet. Choose appropriate code and data licenses before public release.
+License: MIT (see `LICENSE`).
