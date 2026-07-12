@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "package": "corrected_same_session_aggregate_evidence",
+  "source_run": "internal corrected same-session group-disjoint run",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "ede7e9848468a054355a2984108c45199f2179b21c466e070a578bd1bde7fe56",
+      "bytes": 611
+    },
+    {
+      "path": "CITATION.cff",
+      "sha256": "f25ada5beea9c8917ea6a9cd6f4ac948d342cb743e5bcda0252aa7f1e95c829f",
+      "bytes": 631
+    },
+    {
+      "path": "code/corrected_label_group_disjoint_pipeline.py",
+      "sha256": "1f3ce898c6eb944aa37979f361ed800ee705fa7ff4d35fb895089861a78a8c3a",
+      "bytes": 18692
+    },
+    {
+      "path": "code/fig_methodology_workflow_standalone.tex",
+      "sha256": "fbdf01c9c020825de7d114db8b81189a8bfa896a261befdf10fa18d466d20152",
+      "bytes": 348
+    },
+    {
+      "path": "code/fig_methodology_workflow_tikz.tex",
+      "sha256": "8da838192934304f9c247cd93d3d32f13fd6816222da209e7cfac4095baed297",
+      "bytes": 7041
+    },
+    {
+      "path": "code/fig_style.py",
+      "sha256": "09a417cf286ba60df4cf6531a49d7247ebd6e3bafdd6a3d77cc32c3ca71d5ada",
+      "bytes": 2561
+    },
+    {
+      "path": "code/make_corrected_figures.py",
+      "sha256": "6d6f503c04ad9b6b6780bdc511bfbde6cf9a7266a91c76b3aaa5cd48cbc416e7",
+      "bytes": 11571
+    },
+    {
+      "path": "code/validate_public_package.py",
+      "sha256": "0840fd38111fe6b9ace69b82a19c8304f16d9c835365bab3b93192646317c3ab",
+      "bytes": 6206
+    },
+    {
+      "path": "CORRECTION_NOTICE.md",
+      "sha256": "6037892ce715914cea6deddf07988c556bff704becd792b09b4d05bceb7492bb",
+      "bytes": 1460
+    },
+    {
+      "path": "data/processed/README.md",
+      "sha256": "dc271eb47e4ee3841cc5f94e3123f269cf2fad16550ddf138783490ed727d4d6",
+      "bytes": 870
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "ffa601101fb0a8c83a1eb2e2d58ace7cc3c62c56039b061d1ef381a1adfc99d6",
+      "bytes": 1099
+    },
+    {
+      "path": "README.md",
+      "sha256": "6069b674544e98a84940e1ade059bbc8d0499ca178300f8c86250eca99d61282",
+      "bytes": 4445
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "ecbbf1ab1c1dd894d6035efc80897e7f08378bfd54d11d63a9299f503ebf8874",
+      "bytes": 187
+    },
+    {
+      "path": "results/corrected_linkage_metrics.csv",
+      "sha256": "5c8207d73f03391cdd6e25492508321d4809c4ac933888230162e103de550e6e",
+      "bytes": 3208
+    },
+    {
+      "path": "results/corrected_linkage_results.json",
+      "sha256": "cbef8703f564f76860a4fe29afd9d85733046bc66baee0dfc17f8f83f4df9890",
+      "bytes": 34856
+    },
+    {
+      "path": "results/corrected_linkage_summary.md",
+      "sha256": "c66759b7d850e8f095965740cd8fcfa038cd0def2b11fbbf093ff048baf8b36f",
+      "bytes": 3489
+    },
+    {
+      "path": "results/corrected_linkage_topk.csv",
+      "sha256": "f079998f670a416470ee585805a3ff7086911c919f193403f637cb49754d07d7",
+      "bytes": 7520
+    },
+    {
+      "path": "TRACEABILITY.md",
+      "sha256": "3c0c7987737ad01a9d9f1ab3c9fa698d4a2364aed0c898b439028aca6e2e0707",
+      "bytes": 1527
+    }
+  ]
+}

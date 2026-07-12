@@ -1,7 +1,20 @@
-# Processed Data Availability
+# Processed data boundary
 
-Row-level processed firewall datasets are not included in the public-facing package by default.
+No processed row-level dataset is distributed in this repository.
 
-The source telemetry belongs to an institutional firewall environment. Even processed derivatives can carry privacy, institutional, or security exposure risks. These files require explicit institutional authorization and privacy/security review before any public redistribution.
+The manuscript and public package may report privacy-screened aggregate counts
+and metrics. Institutional permission also covers anonymized aggregate
+application, category, and policy-pocket summaries when they are derived from
+the corrected same-session target and contain no row-level mapping.
 
-The accompanying manuscript and repository therefore provide code, documentation, aggregate metrics, linkage counts, and validation summaries. Authorized researchers who need row-level processed artifacts should contact the corresponding author; any sharing is subject to institutional permission and applicable data-protection requirements.
+Do not place any of the following under this directory:
+
+- traffic or threat rows;
+- raw or hashed session identifiers;
+- absolute timestamps;
+- IP addresses, hostnames, usernames, zones, interfaces, countries, or rules;
+- row-level labels, predictions, or group hashes; or
+- synthetic data that encodes the superseded predecessor target.
+
+Authorized researchers must supply local paths to the restricted traffic,
+threat, and processed predictor files when running the pipeline.

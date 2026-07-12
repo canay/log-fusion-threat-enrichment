@@ -1,9 +1,0 @@
-stage,evidence_family,seconds,rows,test_rows,device_requested,device_used
-data_load,all,13.464177299989387,1048576,,cpu,
-fit_predict_calibration,traffic_context_only,41.740845300024375,1048576,209716,cpu,cpu
-fit_predict_calibration,volume_only,23.159261099994183,1048576,209716,cpu,cpu
-fit_predict_calibration,policy_action_only,17.589982200064696,1048576,209716,cpu,cpu
-fit_predict_calibration,context_plus_volume,43.15040779998526,1048576,209716,cpu,cpu
-fit_predict_calibration,context_plus_policy_action,40.75057909998577,1048576,209716,cpu,cpu
-fit_predict_calibration,full_core,40.42185990000144,1048576,209716,cpu,cpu
-total_python_runtime,all,221.24166860000696,1048576,209716,cpu,

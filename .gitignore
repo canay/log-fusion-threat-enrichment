@@ -1,13 +1,43 @@
+# Restricted or row-level telemetry
+data/raw/
+data/restricted_source_data/
+data/private/
+data/**/*.csv
+data/**/*.parquet
+data/**/*.xlsx
+data/**/*.jsonl
+
+# Row-level derivatives and identifiers
+**/*session*id*.csv
+**/*session*hash*
+**/*row*label*
+**/*prediction*.csv
+**/*group*hash*
+
+# Local experiment output (the curated aggregate results/ directory is tracked)
+out/
+outputs/
+experiments/
+*.joblib
+*.pkl
+*.model
+
+# Python and editor artifacts
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
 .venv/
 venv/
-.env
-.DS_Store
-Thumbs.db
-data/raw/
-manuscript/
+.idea/
+.vscode/
+
+# LaTeX build sidecars
 *.aux
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
 *.log
 *.out
 *.synctex.gz

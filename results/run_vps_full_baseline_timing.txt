@@ -1,1 +1,0 @@
-paper3 vps full baseline started=2026-05-15T15:48:04+03:00 ended=2026-05-15T15:51:04+03:00 wall_seconds=180

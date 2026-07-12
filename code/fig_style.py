@@ -1,4 +1,4 @@
-"""Shared figure style for the COMNET manuscript (Q1 restrained single-theme).
+﻿"""Shared figure style for the COMNET manuscript (Q1 restrained single-theme).
 
 One neutral sans (Nimbus Sans, a Helvetica clone; Open Sans on the author's
 Windows build if installed), a constrained navy-to-light-blue ramp with a single
@@ -22,7 +22,7 @@ GRID    = "#e6ebee"
 # Back-compat aliases for older scripts.
 BLUE, TEAL, ORANGE, SKY, GRAY, GREEN, MUTED = C1, C2, ACCENT, C3, NEUTRAL, C2, "#5d6972"
 
-_FONT_STACK = ["Nimbus Sans", "Open Sans", "Liberation Sans", "DejaVu Sans"]
+_FONT_STACK = ["DejaVu Sans"]
 
 
 def set_style() -> None:
@@ -65,5 +65,9 @@ def vgrid(ax) -> None:
 
 
 def save(fig, outdir: Path, stem: str) -> None:
+    fig.savefig(outdir / f"{stem}.pdf", bbox_inches="tight", pad_inches=0.03, facecolor="white")
     fig.savefig(outdir / f"{stem}.png", bbox_inches="tight", pad_inches=0.03, facecolor="white")
+    fallback_dir = outdir / "figures"
+    if fallback_dir.exists():
+        fig.savefig(fallback_dir / f"{stem}.png", bbox_inches="tight", pad_inches=0.03, facecolor="white")
     plt.close(fig)
