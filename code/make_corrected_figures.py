@@ -34,43 +34,46 @@ DEFAULT_RESULTS = LOCAL_RESULTS if LOCAL_RESULTS.exists() else PUBLIC_RESULTS
 PREDECESSOR_AUDIT_COUNT = 19_311
 
 
-def panel_label(ax, label: str) -> None:
-    ax.text(
-        -0.12,
-        1.06,
-        label,
-        transform=ax.transAxes,
-        fontweight="bold",
-        fontsize=9,
+def panel_label(ax, label: str, size: float = 9.5) -> None:
+    ax.annotate(
+        f"({label})",
+        xy=(0.5, 0),
+        xycoords="axes fraction",
+        xytext=(0, -38),
+        textcoords="offset points",
+        ha="center",
+        va="top",
+        fontsize=size,
         color=INK,
-        va="bottom",
     )
 
 
 def linkage(data: dict, out: Path) -> None:
     audit = data["label_audit"]
+    old_rc = plt.rcParams.copy()
+    plt.rcParams.update({"axes.labelsize": 9.5, "xtick.labelsize": 9.0, "ytick.labelsize": 9.0})
     fig, axes = plt.subplots(
         1,
         2,
-        figsize=(8.25, 3.35),
+        figsize=(8.25, 2.6),
         gridspec_kw={"width_ratios": [1.15, 1.0]},
     )
 
     names = [
         "Traffic rows",
-        "Unrestricted ID\ncontrast",
-        "Corrected same-session\ntarget",
+        "Unrestricted ID contrast",
+        "Corrected same-session target",
     ]
     values = [audit["traffic_rows"], PREDECESSOR_AUDIT_COUNT, audit["corrected_positive_rows"]]
     colors = [C1, NEUTRAL, ACCENT]
     y = np.arange(len(names))
-    bars = axes[0].barh(y, values, color=colors, height=0.56, zorder=3)
+    bars = axes[0].barh(y, values, color=colors, height=0.58, zorder=3)
     axes[0].set_xscale("log")
     axes[0].set_yticks(y, names)
-    axes[0].invert_yaxis()
+    axes[0].set_ylim(3.1, -1.1)
     axes[0].set_xlabel("Rows (log scale)")
     axes[0].grid(axis="x", color=GRID, linewidth=0.7, zorder=0)
-    axes[0].spines["left"].set_visible(False)
+    axes[0].spines["left"].set_visible(True)
     axes[0].tick_params(axis="y", length=0)
     for bar, value in zip(bars, values):
         axes[0].text(
@@ -78,10 +81,10 @@ def linkage(data: dict, out: Path) -> None:
             bar.get_y() + bar.get_height() / 2,
             f"{value:,}",
             va="center",
-            fontsize=8,
+            fontsize=9,
             color=INK,
         )
-    panel_label(axes[0], "a")
+    panel_label(axes[0], "a", size=10.5)
 
     tolerances = [0, 30, 60, 300]
     tolerance_counts = [audit["tolerance_positive_rows"][str(x)] for x in tolerances]
@@ -94,12 +97,18 @@ def linkage(data: dict, out: Path) -> None:
         markersize=4.5,
         label="Time-compatible rows",
     )
+    direct_tuple_count = audit.get(
+        "exact_direct_tuple_rows_fail_closed",
+        audit.get("exact_direct_tuple_rows"),
+    )
+    if direct_tuple_count is None:
+        raise KeyError("No direct-tuple audit count found in canonical results")
     axes[1].axhline(
-        audit["exact_direct_tuple_rows"],
+        direct_tuple_count,
         color=ACCENT,
         linestyle="--",
         linewidth=1.25,
-        label="Direct and NAT-aware tuple audits",
+        label="Direct and NAT-aware\ntuple audits",
     )
     axes[1].set_xticks(tolerances)
     axes[1].set_xlabel("Boundary tolerance (s)")
@@ -112,7 +121,7 @@ def linkage(data: dict, out: Path) -> None:
         xytext=(0, 7),
         textcoords="offset points",
         ha="center",
-        fontsize=7.4,
+        fontsize=8.4,
     )
     axes[1].annotate(
         "1,233 at 30--300 s",
@@ -120,13 +129,20 @@ def linkage(data: dict, out: Path) -> None:
         xytext=(0, 8),
         textcoords="offset points",
         ha="center",
-        fontsize=7.4,
+        fontsize=8.4,
     )
-    axes[1].legend(frameon=False, loc="lower right", fontsize=7.2)
-    panel_label(axes[1], "b")
+    leg = axes[1].legend(frameon=False, bbox_to_anchor=(1.05, 1.0), loc="upper left", fontsize=8.2)
+    leg.set_in_layout(False)
+    panel_label(axes[1], "b", size=10.5)
 
-    fig.tight_layout(w_pad=2.0)
-    save(fig, out, "fig_corrected_linkage_audit")
+    fig.tight_layout(w_pad=4.4)
+    fig.savefig(out / "fig_corrected_linkage_audit.pdf", bbox_inches="tight", bbox_extra_artists=[leg], pad_inches=0.03, facecolor="white")
+    fig.savefig(out / "fig_corrected_linkage_audit.png", bbox_inches="tight", bbox_extra_artists=[leg], pad_inches=0.03, facecolor="white")
+    fallback_dir = out / "figures"
+    if fallback_dir.exists():
+        fig.savefig(fallback_dir / "fig_corrected_linkage_audit.png", bbox_inches="tight", bbox_extra_artists=[leg], pad_inches=0.03, facecolor="white")
+    plt.close(fig)
+    plt.rcParams.update(old_rc)
 
 
 def primary_rows(data: dict) -> list[dict]:
@@ -178,17 +194,17 @@ def model_evidence(data: dict, out: Path) -> None:
         ],
     }
 
-    fig, axes = plt.subplots(1, 3, figsize=(9.15, 4.1), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(10.17, 4.1), sharey=True)
     y = np.arange(len(rows))
     for ax, (key, title, letter) in zip(axes, metrics):
         bars = ax.barh(y, values[key], color=colors, height=0.58, zorder=3)
-        ax.set_xlim(0, 1.02)
+        ax.set_xlim(0, 1.10)
         ax.set_xlabel(title)
         ax.grid(axis="x", color=GRID, linewidth=0.7, zorder=0)
         ax.invert_yaxis()
         for bar, value in zip(bars, values[key]):
             ax.text(
-                min(value + 0.018, 0.94),
+                value + 0.018,
                 bar.get_y() + bar.get_height() / 2,
                 f"{value:.3f}",
                 va="center",
@@ -212,7 +228,7 @@ def model_evidence(data: dict, out: Path) -> None:
         fontsize=6.9,
         color=NEUTRAL,
     )
-    fig.tight_layout(w_pad=1.15)
+    fig.tight_layout(w_pad=4.6)
     save(fig, out, "fig_corrected_model_ap")
 
 
@@ -255,7 +271,7 @@ def topk_budget(data: dict, out: Path) -> None:
     axes[0].legend(frameon=False, loc="upper right", fontsize=7.2)
     panel_label(axes[0], "a")
     panel_label(axes[1], "b")
-    fig.tight_layout(w_pad=1.6)
+    fig.tight_layout(w_pad=4.4)
     save(fig, out, "fig_corrected_topk_budget")
 
 
@@ -327,14 +343,14 @@ def stability(data: dict, out: Path) -> None:
     )
     axes[1].set_xticks([1, 2, 3])
     axes[1].set_xlabel("Ordered test block")
-    axes[1].set_title("Within-window temporal movement")
+    axes[1].set_title("Within-window block variation")
     for ax in axes:
-        ax.set_ylim(0.45, 0.92)
+        ax.set_ylim(0.45, 1.02)
         ax.grid(color=GRID, linewidth=0.7)
     axes[0].legend(frameon=False, loc="lower right")
     panel_label(axes[0], "a")
     panel_label(axes[1], "b")
-    fig.tight_layout(w_pad=1.6)
+    fig.tight_layout(w_pad=4.4)
     save(fig, out, "fig_corrected_stability")
 
 

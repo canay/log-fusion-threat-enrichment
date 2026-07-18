@@ -15,10 +15,11 @@ The current package therefore uses a different estimand and evaluation design:
 
 - a namespace-scoped, time-aware same-session target;
 - composite session-instance groups;
-- a later chronological, group-disjoint test block;
+- a cutoff-tie-aware, purged, strictly chronological group-disjoint test block;
 - train-only preprocessing;
 - explicit no-outcome and hard-proxy feature boundaries; and
-- multi-seed, rolling-origin, and fixed-budget aggregate evaluation.
+- exposure-only and rate-normalized diagnostics; and
+- paired block bootstrap, multi-seed, rolling-origin, and fixed-budget aggregate evaluation.
 
 The predecessor and corrected scores are not directly comparable because the
 target, prevalence, partition, and evaluation unit changed. The corrected

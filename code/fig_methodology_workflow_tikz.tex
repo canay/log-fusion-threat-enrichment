@@ -17,36 +17,36 @@
 \begin{tikzpicture}[
   % Expanded coordinates keep routing legible without scaling node text or boxes.
   x=1.18cm,y=1.18cm,
-  font=\fontfamily{qhv}\selectfont\small,
+  font=\fontfamily{qhv}\selectfont\normalsize,
   >=Latex,
   every node/.style={text=fwInk},
   box/.style={draw=fwInk, line width=0.62pt, rounded corners=1.5pt, fill=white,
               align=center, inner xsep=5.5pt, inner ysep=5pt},
   source/.style={box, fill=fwBlueSoft, text width=2.80cm, minimum height=1.53cm},
   threat/.style={box, fill=fwAmberSoft, text width=2.80cm, minimum height=1.53cm},
-  audit/.style={box, fill=white, text width=3.40cm, minimum height=1.53cm},
-  label/.style={box, fill=fwAmberSoft, text width=3.35cm, minimum height=1.53cm},
-  features/.style={box, fill=fwBlueSoft, text width=3.35cm, minimum height=1.53cm},
-  barrier/.style={box, fill=fwRedSoft, text width=3.35cm, minimum height=1.53cm},
-  eval/.style={box, fill=fwGreenSoft, text width=3.50cm, minimum height=1.53cm},
-  diag/.style={box, fill=fwGraySoft, text width=3.25cm, minimum height=1.53cm},
-  claim/.style={box, fill=fwVioletSoft, text width=3.25cm, minimum height=1.53cm},
+  audit/.style={box, fill=white, text width=3.80cm, minimum height=1.53cm},
+  label/.style={box, fill=fwAmberSoft, text width=3.80cm, minimum height=1.53cm},
+  features/.style={box, fill=fwBlueSoft, text width=3.80cm, minimum height=1.53cm},
+  barrier/.style={box, fill=fwRedSoft, text width=3.80cm, minimum height=1.53cm},
+  eval/.style={box, fill=fwGreenSoft, text width=4.00cm, minimum height=1.53cm},
+  diag/.style={box, fill=fwGraySoft, text width=3.80cm, minimum height=1.53cm},
+  claim/.style={box, fill=fwVioletSoft, text width=3.80cm, minimum height=1.53cm},
   release/.style={box, fill=fwGraySoft, text width=6.25cm, minimum height=1.53cm},
   note/.style={box, fill=white, draw=fwFrame, text width=3.40cm, minimum height=1.53cm},
   panel/.style={draw=fwFrame, dashed, line width=0.55pt, rounded corners=2pt},
-  paneltitle/.style={font=\fontfamily{qag}\selectfont\bfseries\normalsize, fill=white, inner xsep=5pt, inner ysep=1pt},
+  paneltitle/.style={font=\fontfamily{qag}\selectfont\bfseries\large, fill=white, inner xsep=5pt, inner ysep=1pt},
   trafficline/.style={-Latex, draw=fwBlue, line width=0.92pt},
   trafficdotted/.style={-Latex, draw=fwBlue, dotted, line width=0.98pt},
   labelline/.style={-Latex, draw=fwAmber, line width=0.92pt},
   evalline/.style={-Latex, draw=fwGreen, line width=0.92pt},
   releaseline/.style={-Latex, draw=fwFrame, dashed, line width=0.72pt},
   blocked/.style={-Latex, draw=fwRed, dashed, line width=0.82pt},
-  edgelabel/.style={font=\fontfamily{qhv}\selectfont\scriptsize, fill=white,
+  edgelabel/.style={font=\fontfamily{qhv}\selectfont\small, fill=white,
                     inner xsep=2pt, inner ysep=1pt, text=fwInk}
 ]
 
 % Deliberately oversized canvas; the rendered 600 dpi PNG is cropped after export.
-\path[use as bounding box] (-0.95,-0.90) rectangle (28.40,12.30);
+\path[use as bounding box] (0.55,2.25) rectangle (28.07,10.45);
 
 \node[source] (traffic) at (2.35,8.95) {\fwHead{Traffic\\export}};
 
@@ -56,31 +56,31 @@
 
 \node[note] (tuple) at (6.65,4.55) {\fwHead{Time and tuple\\cross-checks}};
 
-\node[label] (label) at (11.85,9.10) {\fwHead{Corrected same-session\\target}};
+\node[label] (label) at (11.85,8.95) {\fwHead{Corrected same-session\\target}};
 
 \node[features] (features) at (11.85,5.80) {\fwHead{Completed-session\\traffic attributes}};
 
-\node[barrier] (barrier) at (11.85,3.10) {\fwHead{Outcome and proxy\\feature boundaries}};
+\node[barrier] (barrier) at (11.85,3.35) {\fwHead{Outcome and proxy\\feature boundaries}};
 
-\node[eval] (bench) at (16.25,9.10) {\fwHead{Later chronological\\group-disjoint block}};
+\node[eval] (bench) at (16.25,8.95) {\fwHead{Later chronological\\group-disjoint block}};
 
 \node[eval] (stress) at (16.25,5.80) {\fwHead{No-outcome and hard-proxy\\stress tests}};
 
-\node[diag] (diag) at (21.05,9.10) {\fwHead{AP, confusion, and\\fixed-budget metrics}};
+\node[diag] (diag) at (21.55,8.95) {\fwHead{AP, confusion, and\\fixed-budget metrics}};
 
-\node[claim] (triage) at (25.35,9.10) {\fwHead{Seed and rolling-origin\\stability}};
+\node[claim] (triage) at (25.85,8.95) {\fwHead{Seed and rolling-origin\\stability}};
 
-\node[claim] (claim) at (21.05,5.75) {\fwHead{Retrospective, within-window\\inference}};
+\node[claim] (claim) at (21.55,5.75) {\fwHead{Retrospective, within-window\\inference}};
 
-\node[release] (release) at (23.20,3.35) {\fwHead{Aggregate-only\\release}};
+\node[release] (release) at (23.70,3.35) {\fwHead{Aggregate-only\\release}};
 
 \begin{scope}[on background layer]
-  \coordinate (panelA-sw) at (-0.55,1.95);
-  \coordinate (panelA-ne) at (9.10,11.20);
-  \coordinate (panelB-sw) at (9.70,1.95);
-  \coordinate (panelB-ne) at (18.70,11.20);
-  \coordinate (panelC-sw) at (19.25,1.95);
-  \coordinate (panelC-ne) at (28.20,11.20);
+  \coordinate (panelA-sw) at (0.62,2.32);
+  \coordinate (panelA-ne) at (8.80,10.13);
+  \coordinate (panelB-sw) at (9.72,2.32);
+  \coordinate (panelB-ne) at (18.45,10.13);
+  \coordinate (panelC-sw) at (19.46,2.32);
+  \coordinate (panelC-ne) at (28.00,10.13);
   \node[panel, fit=(panelA-sw)(panelA-ne), inner sep=0pt] (panelA) {};
   \node[panel, fit=(panelB-sw)(panelB-ne), inner sep=0pt] (panelB) {};
   \node[panel, fit=(panelC-sw)(panelC-ne), inner sep=0pt] (panelC) {};
@@ -94,7 +94,7 @@
 \draw[labelline] (threat.east) -- ++(0.48,0) |- ($(audit.west)+(0,-\pairSep)$);
 \draw[labelline] (audit.east) -- ++(0.60,0) |- (label.west);
 \draw[labelline] (audit.south) -- (tuple.north);
-\node[edgelabel, text=fwAmber, anchor=west] at (8.78,9.38) {label evidence};
+\node[edgelabel, text=fwAmber, align=center, rotate=90, fill=none] at (9.37,8.30) {label\\evidence};
 \node[edgelabel, text=fwAmber] at (6.65,6.38) {acceptance evidence};
 
 % Separate traffic-only predictor channel.
@@ -102,22 +102,21 @@
 \node[edgelabel, text=fwBlue] at (7.85,5.55) {predictor channel};
 
 % Explicit leakage block from threat channel to predictor channel.
-\draw[blocked] ($(threat.south)+(-0.18,0)$) -- ++(0,-2.12) -- (barrier.west);
+\draw[blocked] ($(threat.south)+(-0.18,0)$) |- (barrier.west);
 \draw[blocked] (barrier.north) -- (features.south);
 \node[edgelabel, text=fwRed] at (6.05,3.36) {inspection evidence not used as input};
 
 % Benchmark receives the label and predictor channels separately.
-\draw[labelline] (label.east) -- ++(0.46,0) |- ($(bench.west)+(0,\pairSep)$);
+\draw[labelline] (label.east) -- (bench.west);
 \draw[trafficline] (features.east) -- ++(0.46,0) |- ($(bench.west)+(0,-\pairSep)$);
 \draw[evalline] (bench.south) -- (stress.north);
 \node[edgelabel, text=fwGreen] at (16.25,7.45) {validation};
 
 % Diagnostic and interpretation paths.
-\draw[evalline] (bench.east) -- ++(0.58,0) |- ($(diag.west)+(0,\pairSep)$);
+\draw[evalline] (bench.east) -- (diag.west);
 \draw[evalline] (stress.east) -- ++(0.58,0) |- ($(diag.west)+(0,-\pairSep)$);
-\draw[evalline] (diag.east) --
-  node[edgelabel, text=fwGreen, align=center, above=3pt] {bounded\\metrics}
-  (triage.west);
+\draw[evalline] (diag.east) -- (triage.west);
+\node[edgelabel, text=fwGreen, align=center, rotate=90, fill=none] at (23.70,8.30) {bounded\\metrics};
 \draw[evalline] (diag.south) -- (claim.north);
 \coordinate (triageToClaim) at ($(triage.south)+(-0.28,0)$);
 \draw[evalline] (triageToClaim) -- (triageToClaim |- claim.east) -- (claim.east);

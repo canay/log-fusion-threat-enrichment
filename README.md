@@ -21,9 +21,11 @@ The corrected target requires:
 4. aggregate validation against direct and NAT-aware flow-tuple checks.
 
 Evaluation uses composite session-instance groups, a later chronological test
-block, train-only preprocessing, and zero group overlap between train and test.
-The no-outcome feature set is the primary claim-bearing configuration; full core
-is an inspection-informed upper bound, and hard proxy is a stricter stress test.
+block with cutoff-tie assignment and a boundary purge, train-only preprocessing,
+zero group overlap, and a strict latest-train-before-earliest-test invariant. The
+no-outcome feature set is the primary claim-bearing configuration; full core is
+an inspection-informed upper bound, hard proxy is a stricter stress test, and
+exposure-only/rate-normalized models bound observation-opportunity dependence.
 
 ## Canonical aggregate results
 
@@ -34,11 +36,14 @@ is an inspection-informed upper bound, and hard proxy is a stricter stress test.
 | Direct tuple audit | 1,233 |
 | NAT-aware tuple audit | 1,233 |
 | Train/test composite-group overlap | 0 |
-| Primary no-outcome XGBoost AP | 0.560048 |
-| Primary no-outcome macro-F1 | 0.786355 |
-| Primary no-outcome precision at 100 | 0.67 |
-| Hard-proxy XGBoost AP | 0.507609 |
-| Rolling-origin AP range | 0.560048–0.691716 |
+| Strict temporal boundary | PASS |
+| Primary no-outcome XGBoost AP | 0.559456 |
+| Primary no-outcome macro-F1 | 0.778552 |
+| Primary no-outcome precision at 100 | 0.70 |
+| Hard-proxy XGBoost AP | 0.518131 |
+| Volume-only / rate-normalized AP | 0.433048 / 0.437593 |
+| Paired no-outcome minus hard-proxy AP 95% interval | -0.0318–0.1230 |
+| Rolling-origin AP range | 0.559456–0.711880 |
 
 These are retrospective, within-export association measurements. They do not
 establish maliciousness, future prediction, analyst-effort reduction,
@@ -48,7 +53,7 @@ deployment utility, or cross-organization generalization.
 
 ```text
 code/
-  corrected_label_group_disjoint_pipeline.py
+  strict_temporal_exposure_uncertainty_pipeline.py
   make_corrected_figures.py
   fig_style.py
   fig_methodology_workflow_tikz.tex
@@ -61,9 +66,13 @@ results/
   corrected_linkage_metrics.csv
   corrected_linkage_topk.csv
   corrected_linkage_summary.md
+  exposure_strata.csv
+  paired_seed_configuration_ap.csv
+  uncertainty_summary.json
   PUBLIC_MANIFEST.json
 CORRECTION_NOTICE.md
 TRACEABILITY.md
+requirements-model.lock.txt
 ```
 
 ## Reproduce on authorized local data
@@ -78,11 +87,13 @@ Run the corrected pipeline only in an authorized workspace containing the
 restricted traffic and threat exports:
 
 ```powershell
-python code/corrected_label_group_disjoint_pipeline.py `
+python code/strict_temporal_exposure_uncertainty_pipeline.py `
   --traffic C:\authorized\traffic.csv `
   --threat C:\authorized\threat.csv `
-  --processed C:\authorized\traffic_has_linked_threat.csv `
-  --outdir out
+  --derived C:\authorized\corrected_linkage_predictors.csv `
+  --outdir out `
+  --bootstrap-reps 500 `
+  --bootstrap-blocks 20
 ```
 
 Regenerate the empirical figures from the already-published aggregate JSON:
@@ -109,7 +120,9 @@ python code/validate_public_package.py .
 
 ## Data and privacy boundary
 
-Raw firewall telemetry is not distributed. The public package excludes raw or
+Raw firewall telemetry is not distributed. The necessary institutional
+permissions were obtained for the master's thesis from which the study was
+developed. The public package excludes raw or
 processed row-level records, IP addresses, hostnames, usernames, session
 identifiers, session hashes, group hashes, absolute timestamps, row-level
 labels, predictions, and sensitive deployment details.

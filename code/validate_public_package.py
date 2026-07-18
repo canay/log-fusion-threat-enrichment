@@ -61,11 +61,15 @@ def main() -> int:
         root / "TRACEABILITY.md",
         root / "CITATION.cff",
         root / "requirements.txt",
-        root / "code" / "corrected_label_group_disjoint_pipeline.py",
+        root / "code" / "strict_temporal_exposure_uncertainty_pipeline.py",
         root / "code" / "make_corrected_figures.py",
+        root / "requirements-model.lock.txt",
         results / "corrected_linkage_results.json",
         results / "corrected_linkage_metrics.csv",
         results / "corrected_linkage_topk.csv",
+        results / "exposure_strata.csv",
+        results / "paired_seed_configuration_ap.csv",
+        results / "uncertainty_summary.json",
         results / "PUBLIC_MANIFEST.json",
     ]
     for path in required:
@@ -77,7 +81,12 @@ def main() -> int:
         return 1
 
     public_json = json.loads((results / "corrected_linkage_results.json").read_text(encoding="utf-8"))
-    leaked_keys = sorted(FORBIDDEN_JSON_KEYS.intersection(flatten_keys(public_json)))
+    all_keys = set(flatten_keys(public_json))
+    leaked_keys = sorted(
+        key
+        for key in all_keys
+        if key in FORBIDDEN_JSON_KEYS or "time_restricted" in key
+    )
     if leaked_keys:
         errors.append(f"forbidden JSON keys: {', '.join(leaked_keys)}")
 
@@ -123,9 +132,34 @@ def main() -> int:
                 if abs(float(row[field]) - float(candidate[field])) > 1e-12:
                     errors.append(f"top-k mismatch {row_key} {field}")
 
-    timestamp_pattern = re.compile(
-        r'"(?:cutoff_time|receive_time|generate_time|start_time|timestamp)"\s*:\s*"\d{4}'
+    with (results / "exposure_strata.csv").open(encoding="utf-8", newline="") as handle:
+        exposure_csv = list(csv.DictReader(handle))
+    if len(exposure_csv) != len(public_json.get("exposure_strata", [])):
+        errors.append("exposure-strata row count mismatch")
+
+    with (results / "paired_seed_configuration_ap.csv").open(
+        encoding="utf-8", newline=""
+    ) as handle:
+        paired_seed_csv = list(csv.DictReader(handle))
+    if len(paired_seed_csv) != len(public_json.get("seed_paired_configuration_ap", [])):
+        errors.append("paired-seed row count mismatch")
+
+    uncertainty_file = json.loads(
+        (results / "uncertainty_summary.json").read_text(encoding="utf-8")
     )
+    if uncertainty_file != public_json.get("uncertainty"):
+        errors.append("uncertainty summary mismatch")
+
+    split = public_json.get("split", {})
+    if split.get("group_overlap") != 0 or not split.get("strict_max_train_lt_min_test"):
+        errors.append("strict primary split invariant failed")
+    label_audit = public_json.get("label_audit", {})
+    if label_audit.get("direct_rows_added_only_by_missing_missing_equality") != 0:
+        errors.append("direct tuple missing-equals-missing invariant failed")
+    if label_audit.get("nat_aware_rows_added_only_by_missing_missing_equality") != 0:
+        errors.append("NAT-aware tuple missing-equals-missing invariant failed")
+
+    timestamp_pattern = re.compile(r'"[^"]*time[^"]*"\s*:\s*"\d{4}-\d{2}-\d{2}[ T]')
     for path in root.rglob("*"):
         if not path.is_file() or ".git" in path.parts:
             continue

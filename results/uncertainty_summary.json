@@ -1,0 +1,30 @@
+{
+  "method": "paired moving-block bootstrap over temporally ordered, nonoverlapping session groups on fixed seed-42 test scores",
+  "scope": "evaluation-sampling uncertainty; not full training-population uncertainty",
+  "requested_repetitions": 500,
+  "temporal_blocks": 20,
+  "no_outcome_ap": {
+    "replicates": 500,
+    "median": 0.5647922481353831,
+    "percentile_95": [
+      0.4363853272592848,
+      0.7091395038523447
+    ]
+  },
+  "hard_proxy_ap": {
+    "replicates": 500,
+    "median": 0.5333982012604712,
+    "percentile_95": [
+      0.3547697983703746,
+      0.6759407417328486
+    ]
+  },
+  "paired_ap_difference_no_outcome_minus_hard_proxy": {
+    "replicates": 500,
+    "median": 0.03801738336008753,
+    "percentile_95": [
+      -0.03182826269416785,
+      0.12301063244252516
+    ]
+  }
+}

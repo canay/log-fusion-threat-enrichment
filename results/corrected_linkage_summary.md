@@ -1,29 +1,32 @@
-# Corrected Same-Session Linkage Results
+# Strict-Temporal Corrected-Linkage Results
 
 - Corrected positives: 1,233 / 1,048,576 (0.1176%).
-- Primary split: later chronological, composite-session group-disjoint; train/test positives 1033/200; group overlap 0.
-- Exact direct tuple rows: 1,233; NAT-aware tuple rows: 1,233.
-- Random-ranking AP: 0.000953; DNS-rule AP: 0.003946.
+- Fail-closed direct/NAT-aware tuple support: 1,233 / 1,233.
+- Original min-time-only primary split strict temporal invariant: False.
+- Revised split: 838,748 train rows, 209,826 test rows, 1 purged boundary groups, strict max(train)<min(test)=True.
+- Random-ranking AP: 0.000953; DNS-rule AP: 0.003945.
 
-## Model results
+## Seed-42 primary results
 
-| evaluation            | model               | feature_set   |   seed |   macro_f1 |   average_precision |   roc_auc |   positive_precision |   positive_recall |   tp |     fp |
-|:----------------------|:--------------------|:--------------|-------:|-----------:|--------------------:|----------:|---------------------:|------------------:|-----:|-------:|
-| primary_later_20pct   | XGBoost             | full_core     |     42 |   0.927768 |            0.957801 |  0.998729 |             0.882979 |          0.830000 |  166 |     22 |
-| primary_later_20pct   | XGBoost             | no_outcome    |     42 |   0.786355 |            0.560048 |  0.986827 |             0.671141 |          0.500000 |  100 |     49 |
-| primary_later_20pct   | XGBoost             | hard_proxy    |     42 |   0.752055 |            0.507609 |  0.978093 |             0.631579 |          0.420000 |   84 |     49 |
-| primary_later_20pct   | Extra Trees         | no_outcome    |     42 |   0.786336 |            0.500581 |  0.933916 |             0.653846 |          0.510000 |  102 |     54 |
-| primary_later_20pct   | LightGBM            | no_outcome    |     42 |   0.710074 |            0.543099 |  0.982864 |             0.286486 |          0.795000 |  159 |    396 |
-| primary_later_20pct   | CatBoost            | no_outcome    |     42 |   0.583339 |            0.463676 |  0.991980 |             0.094789 |          0.855000 |  171 |   1633 |
-| primary_later_20pct   | Logistic Regression | no_outcome    |     42 |   0.329215 |            0.001749 |  0.725489 |             0.001764 |          0.950000 |  190 | 107537 |
-| primary_later_20pct   | XGBoost             | no_outcome    |     13 |   0.771763 |            0.565012 |  0.993019 |             0.627451 |          0.480000 |   96 |     57 |
-| primary_later_20pct   | XGBoost             | no_outcome    |     73 |   0.770993 |            0.542622 |  0.989689 |             0.623377 |          0.480000 |   96 |     58 |
-| primary_later_20pct   | XGBoost             | no_outcome    |    101 |   0.779017 |            0.562347 |  0.992769 |             0.649007 |          0.490000 |   98 |     53 |
-| primary_later_20pct   | XGBoost             | no_outcome    |    137 |   0.784720 |            0.589133 |  0.992182 |             0.662252 |          0.500000 |  100 |     51 |
-| rolling_origin_fold_1 | XGBoost             | no_outcome    |     42 |   0.852933 |            0.691716 |  0.988303 |             0.818681 |          0.620833 |  149 |     33 |
-| rolling_origin_fold_2 | XGBoost             | no_outcome    |     42 |   0.856335 |            0.643054 |  0.982053 |             0.769231 |          0.664557 |  210 |     63 |
-| rolling_origin_fold_3 | XGBoost             | no_outcome    |     42 |   0.786355 |            0.560048 |  0.986827 |             0.671141 |          0.500000 |  100 |     49 |
+| model               | feature_set     |   macro_f1 |   average_precision |   roc_auc |   positive_precision |   positive_recall |   tp |     fp |
+|:--------------------|:----------------|-----------:|--------------------:|----------:|---------------------:|------------------:|-----:|-------:|
+| XGBoost             | full_core       |   0.942402 |            0.966320 |  0.999374 |             0.905759 |          0.865000 |  173 |     18 |
+| XGBoost             | no_outcome      |   0.778552 |            0.559456 |  0.989519 |             0.655405 |          0.485000 |   97 |     51 |
+| XGBoost             | hard_proxy      |   0.757201 |            0.518131 |  0.978032 |             0.630435 |          0.435000 |   87 |     51 |
+| Extra Trees         | no_outcome      |   0.787957 |            0.493705 |  0.933950 |             0.662338 |          0.510000 |  102 |     52 |
+| LightGBM            | no_outcome      |   0.702903 |            0.544189 |  0.983304 |             0.270627 |          0.820000 |  164 |    442 |
+| CatBoost            | no_outcome      |   0.583249 |            0.476547 |  0.991243 |             0.094587 |          0.865000 |  173 |   1656 |
+| Logistic Regression | no_outcome      |   0.330141 |            0.001849 |  0.740269 |             0.001844 |          0.990000 |  198 | 107168 |
+| XGBoost             | duration_only   |   0.499762 |            0.014738 |  0.802053 |             0.000000 |          0.000000 |    0 |      0 |
+| XGBoost             | volume_only     |   0.709974 |            0.433048 |  0.969628 |             0.578947 |          0.330000 |   66 |     48 |
+| XGBoost             | rate_normalized |   0.734388 |            0.437593 |  0.970936 |             0.567376 |          0.400000 |   80 |     61 |
 
-## Interpretation
+## Paired block-bootstrap evaluation uncertainty
 
-These results estimate retrospective same-session threat-log linkage inside the observed export. They do not establish future attack detection, analyst-effort reduction, deployment utility, or cross-organization generalization.
+- No-outcome AP 95% interval: 0.4364 to 0.7091.
+- Hard-proxy AP 95% interval: 0.3548 to 0.6759.
+- Paired AP difference 95% interval: -0.0318 to 0.1230.
+
+## Interpretation boundary
+
+The strict purge repairs the chronological boundary but does not create external validation. Exposure-only, rate-normalized, seed-paired, and block-bootstrap results diagnose dependence and uncertainty inside this single observed export; they do not support causal, deployment, or cross-organization claims.
