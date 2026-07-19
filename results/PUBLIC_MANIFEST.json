@@ -14,16 +14,6 @@
       "bytes": 631
     },
     {
-      "path": "code/fig_methodology_workflow_standalone.tex",
-      "sha256": "fbdf01c9c020825de7d114db8b81189a8bfa896a261befdf10fa18d466d20152",
-      "bytes": 348
-    },
-    {
-      "path": "code/fig_methodology_workflow_tikz.tex",
-      "sha256": "cfb03293e9a24080fa1e35568ddb70397a2086a441ce7aa48404867ca8909d65",
-      "bytes": 7138
-    },
-    {
       "path": "code/fig_style.py",
       "sha256": "09a417cf286ba60df4cf6531a49d7247ebd6e3bafdd6a3d77cc32c3ca71d5ada",
       "bytes": 2561
@@ -60,8 +50,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "081f8ee100d4eb64daed209e7bc5800ff2d29bafaada720ab9cdb02f7712cef7",
-      "bytes": 5062
+      "sha256": "3b44d13ff9e1994e65df7b258ab94ad0c750b2c906fcc98aab0dbcb246ce36ef",
+      "bytes": 4773
     },
     {
       "path": "requirements-model.lock.txt",

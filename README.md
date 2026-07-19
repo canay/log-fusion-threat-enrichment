@@ -1,8 +1,8 @@
 # The Echo in the Traffic
 
 Aggregate reproducibility package for the manuscript **“The Echo in the
-Traffic: Session-Level Log Linkage for Threat-Evidence Enrichment in Enterprise
-Firewalls.”**
+Traffic: Validating Time-Aware Linkage Between Enterprise Firewall Sessions and
+Threat-Log Evidence.”**
 
 This repository represents the corrected same-session study. It does not retain
 the predecessor cross-window numeric-identifier task as current evidence. See
@@ -56,8 +56,6 @@ code/
   strict_temporal_exposure_uncertainty_pipeline.py
   make_corrected_figures.py
   fig_style.py
-  fig_methodology_workflow_tikz.tex
-  fig_methodology_workflow_standalone.tex
   validate_public_package.py
 data/processed/
   README.md
@@ -102,14 +100,6 @@ Regenerate the empirical figures from the already-published aggregate JSON:
 python code/make_corrected_figures.py `
   --results results/corrected_linkage_results.json `
   --output-dir figures
-```
-
-The source-native workflow diagram can be compiled from `code/` with:
-
-```powershell
-pdflatex -interaction=nonstopmode -halt-on-error `
-  -jobname=fig_methodology_workflow `
-  fig_methodology_workflow_standalone.tex
 ```
 
 Validate the curated package before release:
