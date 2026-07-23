@@ -20,10 +20,10 @@ boundaries, runtime, dependency versions, or input SHA-256 values.
 |---|---|
 | Corrected target and linkage acceptance | `results/corrected_linkage_results.json` |
 | Primary, seed, and rolling-origin model metrics | `results/corrected_linkage_metrics.csv` |
-| Fixed-budget precision, recall, and exact intervals | `results/corrected_linkage_topk.csv` |
+| Fixed-budget descriptive precision and recall point measurements | `results/corrected_linkage_topk.csv` |
 | Exposure strata and exposure-only diagnostics | `results/exposure_strata.csv`, `results/corrected_linkage_metrics.csv` |
 | Paired seed-configuration differences | `results/paired_seed_configuration_ap.csv` |
-| Paired block-bootstrap uncertainty | `results/uncertainty_summary.json` |
+| Paired nonoverlapping-block-bootstrap uncertainty | `results/uncertainty_summary.json` |
 | Human-readable result summary | `results/corrected_linkage_summary.md` |
 | Corrected target, strict split, exposure, and uncertainty implementation | `code/strict_temporal_exposure_uncertainty_pipeline.py` |
 | Exact modeling dependency lock | `requirements-model.lock.txt` |

@@ -19,13 +19,14 @@ from fig_style import ACCENT, C1, C2, C3, GRID, INK, NEUTRAL, save, set_style
 
 
 ROOT = Path(__file__).resolve().parents[1]
+# Date-prefixed run folders sort chronologically; take the newest canonical
+# output so a superseded run can never silently feed the figures again
+# (FIG-01, 2026-07-23: figures pinned to the retired 2026-07-12 run while the
+# tables reported the 2026-07-17 strict run).
 LOCAL_CANDIDATES = sorted(
-    ROOT.glob(
-        "experiments/2026-07-12_*_corrected-linkage-group-disjoint/"
-        "out/corrected_linkage_results.json"
-    )
+    ROOT.glob("experiments/*/out/corrected_linkage_results.json")
 )
-LOCAL_RESULTS = LOCAL_CANDIDATES[0] if LOCAL_CANDIDATES else Path("__missing_local_results__")
+LOCAL_RESULTS = LOCAL_CANDIDATES[-1] if LOCAL_CANDIDATES else Path("__missing_local_results__")
 PUBLIC_RESULTS = ROOT / "results" / "corrected_linkage_results.json"
 DEFAULT_RESULTS = LOCAL_RESULTS if LOCAL_RESULTS.exists() else PUBLIC_RESULTS
 
@@ -255,10 +256,7 @@ def topk_budget(data: dict, out: Path) -> None:
         k = np.array([row["k"] for row in subset])
         precision = np.array([row["precision"] for row in subset])
         recall = np.array([row["recall"] for row in subset])
-        lower = np.array([row["precision_cp95"][0] for row in subset])
-        upper = np.array([row["precision_cp95"][1] for row in subset])
         axes[0].plot(k, precision, marker=marker, color=color, linewidth=1.65, label=label)
-        axes[0].fill_between(k, lower, upper, color=color, alpha=0.10, linewidth=0)
         axes[1].plot(k, recall, marker=marker, color=color, linewidth=1.65, label=label)
     for ax in axes:
         ax.set_xscale("log")
@@ -360,6 +358,7 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    print(f"figure data source: {args.results.resolve()}")
     data = json.loads(args.results.read_text(encoding="utf-8"))
     set_style()
     linkage(data, args.output_dir)

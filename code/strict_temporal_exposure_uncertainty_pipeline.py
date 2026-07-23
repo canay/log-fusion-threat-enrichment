@@ -638,7 +638,7 @@ def block_bootstrap_ap(
         }
 
     return {
-        "method": "paired moving-block bootstrap over temporally ordered, nonoverlapping session groups on fixed seed-42 test scores",
+        "method": "paired nonoverlapping-block bootstrap over 20 contiguous session-group blocks on fixed seed-42 test scores",
         "scope": "evaluation-sampling uncertainty; not full training-population uncertainty",
         "requested_repetitions": repetitions,
         "temporal_blocks": int(len(row_blocks)),
@@ -789,7 +789,7 @@ def main() -> None:
         "limitations": [
             "One organization, one firewall, and one approximately 47-minute traffic window.",
             "The target is retrospective same-session threat-log linkage, not future maliciousness prediction.",
-            "The moving-block bootstrap conditions on fixed seed-42 scores and does not represent full population or refit uncertainty.",
+            "The nonoverlapping-block bootstrap conditions on fixed seed-42 scores and does not represent full population or refit uncertainty.",
             "Exposure-only and rate-normalized models diagnose observation-opportunity dependence; they do not identify a causal mechanism.",
         ],
     }

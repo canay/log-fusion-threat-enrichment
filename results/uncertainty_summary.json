@@ -1,5 +1,5 @@
 {
-  "method": "paired moving-block bootstrap over temporally ordered, nonoverlapping session groups on fixed seed-42 test scores",
+  "method": "paired nonoverlapping-block bootstrap over 20 contiguous session-group blocks on fixed seed-42 test scores",
   "scope": "evaluation-sampling uncertainty; not full training-population uncertainty",
   "requested_repetitions": 500,
   "temporal_blocks": 20,

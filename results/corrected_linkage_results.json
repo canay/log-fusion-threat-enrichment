@@ -2172,7 +2172,7 @@
     }
   ],
   "uncertainty": {
-    "method": "paired moving-block bootstrap over temporally ordered, nonoverlapping session groups on fixed seed-42 test scores",
+    "method": "paired nonoverlapping-block bootstrap over 20 contiguous session-group blocks on fixed seed-42 test scores",
     "scope": "evaluation-sampling uncertainty; not full training-population uncertainty",
     "requested_repetitions": 500,
     "temporal_blocks": 20,
@@ -2236,7 +2236,7 @@
   "limitations": [
     "One organization, one firewall, and one approximately 47-minute traffic window.",
     "The target is retrospective same-session threat-log linkage, not future maliciousness prediction.",
-    "The moving-block bootstrap conditions on fixed seed-42 scores and does not represent full population or refit uncertainty.",
+    "The nonoverlapping-block bootstrap conditions on fixed seed-42 scores and does not represent full population or refit uncertainty.",
     "Exposure-only and rate-normalized models diagnose observation-opportunity dependence; they do not identify a causal mechanism."
   ],
   "public_release_boundary": {
@@ -2245,7 +2245,7 @@
       "aggregate linkage and fail-closed completeness counts",
       "strict temporal split invariants without absolute timestamps",
       "aggregate model and top-k metrics",
-      "exposure and paired block-bootstrap summaries",
+      "exposure and paired nonoverlapping-block-bootstrap summaries",
       "seeds, feature boundaries, dependency versions, and runtime"
     ],
     "excluded": [

@@ -21,14 +21,15 @@ FORBIDDEN_TEXT = [
     "54-" + "fold",
 ]
 FORBIDDEN_JSON_KEYS = {"host", "created_at", "started_at", "cutoff_time"}
+TEXT_SUFFIXES = {".cff", ".csv", ".json", ".md", ".py", ".tex", ".txt"}
+TEXT_FILENAMES = {".gitattributes", ".gitignore", "LICENSE"}
 
 
-def digest(path: Path) -> str:
-    h = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            h.update(chunk)
-    return h.hexdigest()
+def manifest_identity(path: Path) -> tuple[str, int]:
+    data = path.read_bytes()
+    if path.suffix.lower() in TEXT_SUFFIXES or path.name in TEXT_FILENAMES:
+        data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(data).hexdigest(), len(data)
 
 
 def flatten_keys(value):
@@ -180,14 +181,19 @@ def main() -> int:
         errors.extend(f"row-like data file present: {path.relative_to(root)}" for path in data_csv)
 
     manifest = json.loads((results / "PUBLIC_MANIFEST.json").read_text(encoding="utf-8"))
+    if manifest.get("text_identity") != (
+        "SHA-256 and byte counts use LF-normalized bytes for text files"
+    ):
+        errors.append("manifest text-identity rule missing or unsupported")
     for entry in manifest["files"]:
         path = root / entry["path"]
         if not path.is_file():
             errors.append(f"manifest file missing: {entry['path']}")
             continue
-        if digest(path) != entry["sha256"]:
+        actual_sha256, actual_bytes = manifest_identity(path)
+        if actual_sha256 != entry["sha256"]:
             errors.append(f"manifest hash mismatch: {entry['path']}")
-        if path.stat().st_size != entry["bytes"]:
+        if actual_bytes != entry["bytes"]:
             errors.append(f"manifest size mismatch: {entry['path']}")
 
     if errors:
